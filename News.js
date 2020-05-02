@@ -27,16 +27,24 @@ const News = () => {
     e.preventDefault();
     setUrl(`https://hn.algolia.com/api/v1/search?query=${searchQuery}`);
   };
-  //return jsx  
-  return(
-  <div>
-    <h2>News: </h2>
-    {loading ? "Loading...." : ""}
+
+  const showLoading = () => loading ? <h2>Loading...</h2> : "";
+
+  const showSearchForm = () => 
     <form onSubmit={handleOnSubmit}>
       <input type="text" value={searchQuery} onChange={handleChange} />
       <button>Search</button>
     </form>
-    {news.map((n, i) => (<p key={i}>{n.title}</p>))}
+  ;
+
+  const showNewsContent = () => news.map((n, i) => (<p key={i}>{n.title}</p>));
+  //return jsx  
+  return(
+  <div>
+    <h2>News: </h2>
+    {showLoading()}
+    {showSearchForm()}
+    {showNewsContent()}
   </div>
   );
 };
